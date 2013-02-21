@@ -1,0 +1,105 @@
+/* 
+    Document   : main
+    Created on : Feb 14, 2013, 1:26:50 PM
+    Author     : Shane
+    Description:
+        Contains the styles used by the majority of the website HTML layout
+*/
+
+html {
+    min-height: 100%;
+    
+}
+
+body {
+    min-height: 100%;
+    background: #FFFFFF url('/resources/images/textures/debut_dark.png');
+    
+}
+
+.box {
+    background: inherit;
+}
+
+.banner {
+    background: #FFFFFF url('/resources/images/textures/debut_dark.png');
+    text-align: center;
+    height: 150px;
+}
+
+.content-container {
+    
+    min-height: 100%;
+    background: #efede5 url('/resources/images/textures/kindajean.png');
+   
+}
+
+.content {
+    min-height: 100%;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+.sidebar {
+    min-height: 100%;
+    text-align: center;
+}
+
+
+.sidebar .box {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+
+}
+
+.footer {
+    text-align: center;
+    background: #efede5 url('/resources/images/textures/kindajean.png');
+}
+
+.footer .box {
+    margin-bottom: 0em;
+    padding: .5em;
+}
+
+.entry {
+    
+}
+
+.entry h2 {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.entry_details .author {
+    text-align: left;
+    float: left;
+}
+
+.entry_details .datetime {
+    text-align: right;
+    float: right;
+}
+
+.entry .entry_footer {
+    float: right;
+}
+
+.side_item ul {
+    list-style-type: none;
+}
+
+.show_border {
+    border: 1px #FFF solid;
+}
+
+a, a:visited, a:active { 
+    color: #666666;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}

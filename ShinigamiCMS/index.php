@@ -10,20 +10,42 @@
 
 namespace ShinigamiCMS;
 
-$system_dir = '/home/dev.packetunderground.com/webroot/ShinigamiCMS/system/'; 
-$app_dir = '/home/dev.packetunderground.com/webroot/ShinigamiCMS/application/';
-define(DEFAULT_CONTROLLER, 'default_controller');
+/**
+ * If you wish to move index.php simply replace the following 2 vars with the 
+ * location of your system/ and application directories and DON'T FORGET THE
+ * TRAILING SLASH AT THE END!!!!!
+ */
+$system_dir = 'system/'; 
+$app_dir = 'application/';
 
+/** This line defines the default controller that will be used when none is specified. */
+define(DEFAULT_CONTROLLER, 'default_controller');
+define(DEFAULT_404, 'default_404'); //Leave blank for default!
+
+/** DO NOT MODIFY BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING THESE ARE 
+ * NOT CONFIGURATION ITEMS!!!!
+ * <-------------------------------------------------------------------------->
+ */
 require_once($system_dir . 'core/routing.php');
 require_once($system_dir . 'utils/security.php');
 require_once($system_dir . 'core/registry.php');
+require_once($system_dir . 'core/object_base.php');
+require_once($system_dir . 'core/object_loader.php');
+require_once($system_dir . 'core/helper_functions.php');
 use ShinigamiCMS\System\Core\Routing;
 use ShinigamiCMS\System\Utils\Security;
 use ShinigamiCMS\System\Core\Registry;
+use ShinigamiCMS\System\Core\Objectloader;
 
+//Setup the registry with some important data.
 $router = new Routing();
 $registry = &Registry::get_instance();
+$registry->router = $router;
 $registry->security = Security::get_instance();
+$registry->system_dir = $system_dir;
+$registry->app_dir = $app_dir;
+$registry->load = Objectloader::get_instance();
+
 
 
 $URL = $registry->security->sanitize_file_uri( $_SERVER['PHP_SELF'] );
@@ -33,13 +55,18 @@ if ( substr( $URL, 0, 10) == '/index.php' ) {
 
 $URL = rtrim($URL, "/");
 
+// This is a neat trick, if we want to generate a 404 we simply return False from the controller.
 $results = $router->route_url($app_dir, $URL);
 if (!$results) {
     //HANDLE 404 here
-    echo '<html><body><h1 align="center">404</h1></body></html>';
+    if ( strlen(DEFAULT_404) > 0) {
+        $results = $router->route_url($app_dir, DEFAULT_404);
+    }
+    else {
+        $results = '<html><body><h1 align="center">404 Page Not Found</h1></body></html>';
+    }
 }
-else {
-    echo $results;
-}
+    
+echo $results;
 
 ?>

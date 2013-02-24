@@ -21,7 +21,7 @@ class Objectbase {
      */
     public function __construct() {
     
-        $this->registry &= Registry::get_instance();
+        $this->registry = &Registry::get_instance();
         
     }
     

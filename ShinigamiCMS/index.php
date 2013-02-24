@@ -14,12 +14,19 @@ $system_dir = '/home/dev.packetunderground.com/webroot/ShinigamiCMS/system/';
 $app_dir = '/home/dev.packetunderground.com/webroot/ShinigamiCMS/application/';
 define(DEFAULT_CONTROLLER, 'default_controller');
 
-require_once($system_dir . 'routing.php');
-use ShinigamiCMS\System\Routing;
+require_once($system_dir . 'core/routing.php');
+require_once($system_dir . 'utils/security.php');
+require_once($system_dir . 'core/registry.php');
+use ShinigamiCMS\System\Core\Routing;
+use ShinigamiCMS\System\Utils\Security;
+use ShinigamiCMS\System\Core\Registry;
 
 $router = new Routing();
+$registry = &Registry::get_instance();
+$registry->security = Security::get_instance();
 
-$URL = $_SERVER['PHP_SELF'];
+
+$URL = $registry->security->sanitize_file_uri( $_SERVER['PHP_SELF'] );
 if ( substr( $URL, 0, 10) == '/index.php' ) {
     $URL = substr($URL, 11);
 }

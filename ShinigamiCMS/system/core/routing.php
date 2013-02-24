@@ -4,11 +4,11 @@
  * This file contains the URL Routing functionality for ShinigamiCMS.
  * DO NOT CHANGE THIS OR I WILL LIKLEY HUNT YOU DOWN AND SLAUGHTER YOU!.
  * 
- * @package ShinigamiCMS\System
+ * @package ShinigamiCMS\System\Core
  * @author Shane McIntosh (BinaryShinigami)
  */
 
-namespace ShinigamiCMS\System;
+namespace ShinigamiCMS\System\Core;
 use ShinigamiCMS;
 
 class Routing {
@@ -98,4 +98,4 @@ class Routing {
     
 }
 
-?>
+/* End of routing.php */

@@ -29,6 +29,10 @@ class Objectbase {
         return $this->registry->__get($key);
     }
     
+    public function __set($key, $value) {
+        $this->registry->__set($key,$value);
+    }
+    
 }
 
 /* End of objectbase.php */

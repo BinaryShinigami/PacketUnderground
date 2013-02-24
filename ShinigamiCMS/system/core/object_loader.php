@@ -66,24 +66,31 @@ class Objectloader extends Objectbase {
      * @return boolean
      */
     public function load_library($libname) {
-        if ( file_exists( $this->app_dir . 'libraries/' . $libname . '.php' ) ) {
-            require_once( $this->app_dir . 'libraries/' . $libname . '.php');
+        $filepath = $this->app_dir . 'libraries/' . $libname . '.php';
+        if ( file_exists( $filepath ) ) {
+            require_once( $filepath );
             
             $cap_libname = ucfirst($libname);
-            $this->registry->__set($libname, new $cap_libname());
+            $tobj = new $cap_libname();
+            Registry::$class_instances[$libname]= $tobj;
             return True;
         }
-        elseif ( file_exists( $this->system_dir . 'libraries/' . $libname . '.php' ) ) {
-            
-            require_once( $this->system_dir . 'libraries/' . $libname . '.php');
-            
-            $cap_libname = ucfirst($libname);
-            $this->registry->__set($libname, new $cap_libname());
-            return True;
-            
-        }
-        else {
-            return False;
+        else
+        {
+            $filepath = $this->system_dir . 'libraries/' . $libname . '.php';
+            if ( file_exists( $filepath ) ) {
+
+                require_once( $filepath );
+
+                $cap_libname = ucfirst($libname);
+                $tobj = new $cap_libname();
+                Registry::$class_instances[$libname]= $tobj;
+                return True;
+
+            }
+            else {
+                return False;
+            }
         }
     }
     

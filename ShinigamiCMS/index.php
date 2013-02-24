@@ -44,9 +44,7 @@ $registry->router = $router;
 $registry->security = Security::get_instance();
 $registry->system_dir = $system_dir;
 $registry->app_dir = $app_dir;
-$registry->load = Objectloader::get_instance();
-
-
+$registry->loader = Objectloader::get_instance();
 
 $URL = $registry->security->sanitize_file_uri( $_SERVER['PHP_SELF'] );
 if ( substr( $URL, 0, 10) == '/index.php' ) {

@@ -26,7 +26,7 @@ class Objectbase {
     }
     
     public function __get($key) {
-        return $this->registry->get($key);
+        return $this->registry->__get($key);
     }
     
 }

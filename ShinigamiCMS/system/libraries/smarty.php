@@ -4,9 +4,12 @@
  * 
  * @package ShinigamiCMS\System\Libraries
  * @author Shane McIntosh (BinaryShinigami)
+ * 
  */
 
-require_once('./Smarty/Smarty.class.php');
 
+use ShinigamiCMS\System\Core\Registry;
+$registry = &Registry::get_instance();
+require_once($registry->system_dir . 'libraries/Smarty/Smarty.class.php');
 
 /* End of smarty.php */

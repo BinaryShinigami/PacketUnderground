@@ -7,6 +7,7 @@
  * @package ShinigamiCMS\System\Libraries
  */
 
+namespace ShinigamiCMS\System\Libraries;
 use ShinigamiCMS\System\Core\Objectbase;
 
 class Config extends Objectbase {

@@ -7,6 +7,7 @@
  * @package PacketUnderground
  */
 
+namespace PacketUnderground\Models;
 use ShinigamiCMS\System\Core\Objectbase;
 
 class Blog_user extends Objectbase {

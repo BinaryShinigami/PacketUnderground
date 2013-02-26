@@ -71,6 +71,16 @@ class Objectloader extends Objectbase {
             require_once( $filepath );
             
             $cap_libname = ucfirst($libname);
+            $namelen = strlen($cap_libname);
+            $loaded_classes = get_declared_classes();
+            foreach ($loaded_classes as $class) {
+                if (substr($class, -($namelen)) == $cap_libname) {
+                    $cap_libname = $class;
+                }
+            }
+            if (! class_exists($cap_libname)) {
+                return False;
+            }
             $tobj = new $cap_libname();
             Registry::$class_instances[$libname]= $tobj;
             return True;
@@ -83,6 +93,16 @@ class Objectloader extends Objectbase {
                 require_once( $filepath );
 
                 $cap_libname = ucfirst($libname);
+                $namelen = strlen($cap_libname);
+                $loaded_classes = get_declared_classes();
+                foreach ($loaded_classes as $class) {
+                    if (substr($class, -($namelen)) == $cap_libname) {
+                        $cap_libname = $class;
+                    }
+                }
+                if (! class_exists($cap_libname)) {
+                    return False;
+                }
                 $tobj = new $cap_libname();
                 Registry::$class_instances[$libname]= $tobj;
                 return True;

@@ -7,7 +7,7 @@
  * @package PacketUnderground
  */
 
-use ShinigamiCMS\System\Core\Objectbase;
+use \ShinigamiCMS\System\Core\Objectbase;
 
 class Blog_layout extends Objectbase {
     

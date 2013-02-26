@@ -5,7 +5,7 @@ class Test extends ShinigamiCMS\System\Core\Objectbase {
     
     public function Index() {
         if ($this->loader->load_library('blog_layout')) {
-            return $this->blog_layout->render_page('<p>This is a sample Test Page<p>');
+            return $this->blog_layout->render_front_page();
         }
         else {
             return "Error Loading Library?!";

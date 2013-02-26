@@ -42,11 +42,63 @@ class Blog_layout extends Objectbase {
     );
     }
     
-    public function render_page($content) {
+    public function render_page($content, $template = 'packetunderground/base.tpl') {
         $this->smarty->assign('data', $content);
         $this->smarty->assign('sideitems', $this->temp_sidebars);
         
-        return $this->smarty->fetch('packetunderground/base.tpl');
+        return $this->smarty->fetch($template);
+    }
+    
+    public function render_front_page($blog_posts) {
+        
+        $posts_temp = array(
+            array(
+                'title' => 'Test Post',
+                'author' => 'Shane McIntosh',
+                'timestamp' => 'Feb 26 2013',
+                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
+                'comment_uri' => '#',
+                'comment_count' => '0'
+            ),
+            array(
+                'title' => 'Test Post',
+                'author' => 'Shane McIntosh',
+                'timestamp' => 'Feb 26 2013',
+                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
+                'comment_uri' => '#',
+                'comment_count' => '0'
+            ),
+            array(
+                'title' => 'Test Post',
+                'author' => 'Shane McIntosh',
+                'timestamp' => 'Feb 26 2013',
+                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
+                'comment_uri' => '#',
+                'comment_count' => '0'
+            ),
+            array(
+                'title' => 'Test Post',
+                'author' => 'Shane McIntosh',
+                'timestamp' => 'Feb 26 2013',
+                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
+                'comment_uri' => '#',
+                'comment_count' => '0'
+            ),
+            array(
+                'title' => 'Test Post',
+                'author' => 'Shane McIntosh',
+                'timestamp' => 'Feb 26 2013',
+                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
+                'comment_uri' => '#',
+                'comment_count' => '0'
+            ),
+        );
+        
+        $this->smarty->assign('posts', $posts_temp);
+        $this->smarty->assign('sideitems', $this->temp_sidebars);
+        
+        return $this->smarty->fetch('packetunderground/front_page.tpl');
+        
     }
     
 }

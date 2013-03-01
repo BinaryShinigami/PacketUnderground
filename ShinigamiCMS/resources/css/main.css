@@ -95,11 +95,7 @@ h2 {
     border: 1px #FFF solid;
 }
 
-a, a:visited, a:active { 
+a, a:active { 
     color: #666666;
-    text-decoration: none;
-}
-
-a:hover {
     text-decoration: none;
 }

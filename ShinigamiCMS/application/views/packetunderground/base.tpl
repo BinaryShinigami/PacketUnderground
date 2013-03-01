@@ -3,7 +3,7 @@
         <title>{block name=title}Packet Underground -- Scattered Ramblings{/block}</title>
         <link rel="stylesheet" href="/resources/css/blueprint/screen.css" type="text/css" media="screen, projection">
         <link rel="stylesheet" href="/resources/css/blueprint/print.css" type="text/css" media="print"> 
-        <!--[if lt IE 8]>
+        <!--[if lt IE 10]>
           <link rel="stylesheet" href="resources/css/blueprint/ie.css" type="text/css" media="screen, projection">
         <![endif]-->
         <link rel="stylesheet" type="text/css" href="/resources/css/main.css" media="screen, projection" />

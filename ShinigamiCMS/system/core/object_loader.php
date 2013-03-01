@@ -38,7 +38,17 @@ class Objectloader extends Objectbase {
             require_once( $this->app_dir . 'models/' . $modelname . '.php');
             
             $cap_modelname = ucfirst($modelname);
-            $this->registry->__set($modelname, new $cap_modelname());
+            $namelen = strlen($cap_modelname);
+            $loaded_classes = get_declared_classes();
+            foreach ($loaded_classes as $class) {
+                if (substr($class, -($namelen)) == $cap_modelname) {
+                    $cap_modelname = $class;
+                }
+            }
+            if (! class_exists($cap_modelname)) {
+                return False;
+            }
+            Registry::$class_instances[$modelname] =  new $cap_modelname();
             return True;
         }
         elseif ( file_exists( $this->system_dir . 'models/' . $modelname . '.php' ) ) {
@@ -46,7 +56,17 @@ class Objectloader extends Objectbase {
             require_once( $this->system_dir . 'models/' . $modelname . '.php');
             
             $cap_modelname = ucfirst($modelname);
-            $this->registry->__set($modelname, new $cap_modelname());
+            $namelen = strlen($cap_modelname);
+            $loaded_classes = get_declared_classes();
+            foreach ($loaded_classes as $class) {
+                if (substr($class, -($namelen)) == $cap_modelname) {
+                    $cap_modelname = $class;
+                }
+            }
+            if (! class_exists($cap_modelname)) {
+                return False;
+            }
+            Registry::$class_instances[$modelname] =  new $cap_modelname();
             return True;
             
         }

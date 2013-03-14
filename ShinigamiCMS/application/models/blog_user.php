@@ -4,7 +4,7 @@
  * This file contains code for manipulating Users for the PacketUndergroudn CMS.
  * 
  * @author Shane McIntosh (BinaryShinigami)
- * @package PacketUnderground
+ * @package PacketUnderground\Models
  */
 
 namespace PacketUnderground\Models;

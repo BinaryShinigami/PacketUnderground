@@ -1,7 +1,7 @@
 <?php
 
 use PacketUnderground\Models\Blog_user;
-
+use PacketUnderground\Models\Blog_post;
 class Test extends ShinigamiCMS\System\Core\Objectbase {
     
     public function Index() {
@@ -100,6 +100,75 @@ class Test extends ShinigamiCMS\System\Core\Objectbase {
         else {
             return 'User Not Found';
         }
+    }
+    
+    public function Create_post() {
+        if ((!isset($_POST['title'])) || (!isset($_POST['slug'])) || (!isset($_POST['authorid']))) {
+            $content = '<div class="center"><h1>Create Post</h1><form action="" method="post">
+                Title: <input type="text" id="title" name="title" /><br />
+                Slug: <input type="text" id="slug" name="slug" /><br />
+                Author ID: <input type="text" id="authorid" name="authorid" value="0" /><br />
+                Content:<br /><textarea cols=30 rows=15 name="content" id="content"></textarea><br />
+                <input type="submit" />
+                </form></div>';
+            $this->loader->load_library('blog_layout');
+            return $this->blog_layout->render_page($content);
+        }
+        else {
+            if (!$this->loader->load_model('blog_post')) {
+                die('Unable to load blog post model?!');
+            }
+            $post = new Blog_post();
+            $post->set_title($_POST['title']);
+            $post->set_authorid($_POST['authorid']);
+            $post->set_slug($_POST['slug']);
+            $post->set_contents($_POST['content']);
+            $error = $post->commit_post();
+            if (! $error) {
+                $msg = 'Post Created Successfully!';
+            }
+            else {
+                $msg = 'Post Creation Failed!  : ' . $error[2];
+            }
+            $this->loader->load_library('blog_layout');
+            return $this->blog_layout->render_page($msg);
+        }
+        
+        
+    }
+    
+    public function View_post_id($id) {
+        $this->loader->load_library('blog_layout');
+        $this->loader->load_model('blog_post');
+        
+        $post = new Blog_post();
+        if ($post->fetch_post_by_id($id)) {
+            $data = 'Post Title: ' . $post->get_title() . '<br />
+                    Post Author: ' . $post->get_author() . '<br />
+                    Post Timestamp: ' . $post->get_timestamp() . '<br />
+                    Post Slug: ' . $post->get_slug() . '<br />
+                    Post Content: ' . $post->get_contents();
+            return $data;
+        }
+        return 'That post Doesnt exit';
+        
+    }
+    
+    public function View_post_slug($slug) {
+        $this->loader->load_library('blog_layout');
+        $this->loader->load_model('blog_post');
+        
+        $post = new Blog_post();
+        if ($post->fetch_post_by_slug($slug)) {
+            $data = 'Post Title: ' . $post->get_title() . '<br />
+                    Post ID: ' . $post->get_id() . '<br />
+                    Post Author: ' . $post->get_author() . '<br />
+                    Post Timestamp: ' . $post->get_timestamp() . '<br />
+                    Post Slug: ' . $post->get_slug() . '<br />
+                    Post Content: ' . $post->get_contents();
+            return $data;
+        }
+        return 'That post Doesnt exit';
     }
 }
 

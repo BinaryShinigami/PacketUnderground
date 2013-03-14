@@ -99,3 +99,7 @@ a, a:active {
     color: #666666;
     text-decoration: none;
 }
+
+.center {
+    text-align: center;
+}

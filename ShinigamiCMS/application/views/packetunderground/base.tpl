@@ -19,7 +19,9 @@
                 <div class="span-19 content">
                     <!-- Start Content Area -->
                     {block name=content}
+                    <div class='box'>
                     {$data}
+                    </div>
                     {/block}
                     <!-- End Content Area -->
                 </div>

@@ -139,7 +139,7 @@ class Blog_post extends Objectbase {
         $stmt->bindParam(':slug', $this->slug, PDO::PARAM_STR);
         $stmt->bindParam(':content', $this->contents, PDO::PARAM_STR);
         if ($stmt->execute()) {
-            return FALSE;
+            return TRUE;
         }
         else {
             return $stmt->errorInfo();

@@ -18,6 +18,8 @@ class Blog_user extends Objectbase {
     private $permissions;
     private $salt;
     
+    public static $ADMIN_BIT = 0xFF;
+    
     public function __construct() {
         parent::__construct();
         

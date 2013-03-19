@@ -19,12 +19,13 @@ class Blog extends ShinigamiCMS\System\Core\Objectbase {
         $objects = array();
         $obj_num = 0;
         if ($stmt->execute()) {
-            $obj_id = $stmt->fetch();
-            $obj_id = $obj_id['id'];
-            $tpost = new Blog_post();
-            $tpost->fetch_post_by_id($obj_id);
-            $objects[$obj_num] = $tpost;
-            $obj_num++;
+            while ($obj_id = $stmt->fetch()) {
+                $obj_id = $obj_id['id'];
+                $tpost = new Blog_post();
+                $tpost->fetch_post_by_id($obj_id);
+                $objects[$obj_num] = $tpost;
+                $obj_num++;
+            }
         }
         return $objects;
     }

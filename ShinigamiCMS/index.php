@@ -26,6 +26,9 @@ define(DEFAULT_404, 'default_404'); //Leave blank for default!
  * NOT CONFIGURATION ITEMS!!!!
  * <-------------------------------------------------------------------------->
  */
+
+session_start();
+
 require_once($system_dir . 'core/routing.php');
 require_once($system_dir . 'utils/security.php');
 require_once($system_dir . 'core/registry.php');
@@ -76,8 +79,7 @@ if (!$results) {
     else {
         $results = '<html><body><h1 align="center">404 Page Not Found</h1></body></html>';
     }
-}
-    
+}    
 echo $results;
 
 ?>

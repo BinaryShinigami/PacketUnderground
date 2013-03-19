@@ -59,6 +59,7 @@ class Config extends Objectbase {
         $file_list = $this->get_app_file_list();
         foreach($file_list as $file) {
             require_once($file);
+            global $config;
             if (is_array($config))
                 Config::$reg_obj = array_merge($config, Config::$reg_obj);
         }

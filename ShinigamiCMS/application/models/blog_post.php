@@ -13,7 +13,7 @@ use PacketUnderground\Models\Blog_user;
 use \PDO as PDO;
 
 class Blog_post extends Objectbase {
-   
+    
     private $title;
     private $slug;
     private $author;

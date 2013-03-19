@@ -20,82 +20,29 @@ class Blog_layout extends Objectbase {
         
         $this->loader->load_library('smarty');
         $this->smarty->setTemplateDir($this->app_dir . 'views/');
-        $this->temp_sidebars = array(
-        array(
-            'title' => 'Navigation',
-            'links' => array(
-                array(
-                    'title' => 'Home',
-                    'uri' => '/'
-               ),
-                array(
-                    'title' => 'voooid',
-                    'uri' => 'http://voooid.com/'
-               ),
-                array(
-                    'title' => 'Google',
-                    'uri' => 'http://google.com'
-               )
-            )
-        )
         
-    );
     }
     
-    public function render_page($content, $template = 'packetunderground/base.tpl') {
+    public function render_page($content, $sidebars = 0, $template = 'packetunderground/base.tpl') {
         $this->smarty->assign('data', $content);
-        $this->smarty->assign('sideitems', $this->temp_sidebars);
         
+        if (!$sidebars) {
+            $sidebars = $this->config->Sidebar['Items'];
+        }
+        
+        $this->smarty->assign('sideitems', $sidebars);
+        
+        $this->smarty->setTemplateDir($this->app_dir . 'views/');
         return $this->smarty->fetch($template);
     }
     
     public function render_front_page($blog_posts) {
+        $sidebar = $this->config->Sidebar['Items'];
         
-        $posts_temp = array(
-            array(
-                'title' => 'Test Post',
-                'author' => 'Shane McIntosh',
-                'timestamp' => 'Feb 26 2013',
-                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
-                'comment_uri' => '#',
-                'comment_count' => '0'
-            ),
-            array(
-                'title' => 'Test Post',
-                'author' => 'Shane McIntosh',
-                'timestamp' => 'Feb 26 2013',
-                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
-                'comment_uri' => '#',
-                'comment_count' => '0'
-            ),
-            array(
-                'title' => 'Test Post',
-                'author' => 'Shane McIntosh',
-                'timestamp' => 'Feb 26 2013',
-                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
-                'comment_uri' => '#',
-                'comment_count' => '0'
-            ),
-            array(
-                'title' => 'Test Post',
-                'author' => 'Shane McIntosh',
-                'timestamp' => 'Feb 26 2013',
-                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
-                'comment_uri' => '#',
-                'comment_count' => '0'
-            ),
-            array(
-                'title' => 'Test Post',
-                'author' => 'Shane McIntosh',
-                'timestamp' => 'Feb 26 2013',
-                'content' => 'This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts! This is just garbagey stupid filler content. Enjoy it while it lasts!',
-                'comment_uri' => '#',
-                'comment_count' => '0'
-            ),
-        );
+        $this->smarty->setTemplateDir($this->app_dir . 'views/');
         
-        $this->smarty->assign('posts', $posts_temp);
-        $this->smarty->assign('sideitems', $this->temp_sidebars);
+        $this->smarty->assign('posts', $blog_posts);
+        $this->smarty->assign('sideitems', $sidebar);
         
         return $this->smarty->fetch('packetunderground/front_page.tpl');
         

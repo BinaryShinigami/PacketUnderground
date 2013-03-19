@@ -114,6 +114,7 @@ class Blog_post extends Objectbase {
         
         return FALSE;
     }
+
     
     /**
      * Commits the post data to the database, creates a new database entry if no ID of post is supplied to be overwritten.

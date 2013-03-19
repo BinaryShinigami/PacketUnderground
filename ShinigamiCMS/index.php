@@ -19,7 +19,7 @@ $system_dir = 'system/';
 $app_dir = 'application/';
 
 /** This line defines the default controller that will be used when none is specified. */
-define(DEFAULT_CONTROLLER, 'default_controller');
+define(DEFAULT_CONTROLLER, 'blog');
 define(DEFAULT_404, 'default_404'); //Leave blank for default!
 
 /** DO NOT MODIFY BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING THESE ARE 
@@ -32,10 +32,13 @@ require_once($system_dir . 'core/registry.php');
 require_once($system_dir . 'core/object_base.php');
 require_once($system_dir . 'core/object_loader.php');
 require_once($system_dir . 'core/helper_functions.php');
+require_once($system_dir . 'libraries/config.php');
+require_once($app_dir . 'config/auto_loader.php');
 use ShinigamiCMS\System\Core\Routing;
 use ShinigamiCMS\System\Utils\Security;
 use ShinigamiCMS\System\Core\Registry;
 use ShinigamiCMS\System\Core\Objectloader;
+use ShinigamiCMS\System\Libraries\Config;
 
 //Setup the registry with some important data.
 $router = new Routing();
@@ -45,6 +48,16 @@ $registry->security = Security::get_instance();
 $registry->system_dir = $system_dir;
 $registry->app_dir = $app_dir;
 $registry->loader = Objectloader::get_instance();
+$registry->config = Config::get_instance();
+$registry->config->load_config_files();
+
+foreach ($auto_models as $model) {
+    $registry->loader->load_model($model);
+}
+
+foreach ($auto_libraries as $lib) {
+    $registry->loader->load_library($lib);
+}
 
 $URL = $registry->security->sanitize_file_uri( $_SERVER['PHP_SELF'] );
 if ( substr( $URL, 0, 10) == '/index.php' ) {

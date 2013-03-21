@@ -20,7 +20,11 @@ class Admin extends \ShinigamiCMS\System\Core\Objectbase {
             if (! $this->is_admin($user)) {
                 return $this->blog_layout->render_page('<h2 align="center">Sorry but you\'re not an admin!</h2>');
             }
-            return $this->blog_layout->render_page('<h2 align="center">Welcome ' . $user->get_username() . '<h2>');
+            
+            $page = '<h2 align="center">Welcome ' . $user->get_username() . '</h2>
+                Please Select an action to perform: <br />
+                <a href="/admin/add_post/">Add New Blog Post</a><br />';
+            return $this->blog_layout->render_page($page);
         }
         
     }
@@ -49,7 +53,7 @@ class Admin extends \ShinigamiCMS\System\Core\Objectbase {
             $post->set_title($_POST['title']);
             $data = $post->commit_post();
             if ($data) {
-                return $this->blog_layout->render_page('<h2 align="center">Post Added!</h2>');
+                return $this->blog_layout->render_page('<h2 align="center">Post Added!</h2><a href="/">Click Here</a>');
             }
             else {
                 return $this->blog_layout->render_page('<h2 align="center">Post Creation Failed!</h2>Reason: ' . $data);
@@ -73,7 +77,7 @@ class Admin extends \ShinigamiCMS\System\Core\Objectbase {
             }
             
             $_SESSION['uid'] = $user->get_userid();
-            return $this->blog_layout->render_page('<h2>Welcome</h2>');
+            return $this->blog_layout->render_page('<h2>Welcome</h2><script>document.location="/admin/";</script>');
         }
     }
     

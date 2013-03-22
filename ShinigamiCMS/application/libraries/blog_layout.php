@@ -56,6 +56,18 @@ class Blog_layout extends Objectbase {
         
     }
     
+    public function render_post($post) {
+        
+        $this->smarty->setTemplateDir($this->app_dir . 'views/');
+        
+        $side = $this->config->Sidebar['Items'];
+        $this->smarty->assign('sideitems', $side);
+        
+        $this->smarty->assign('post', $post);
+        return $this->smarty->fetch('packetunderground/single_post.tpl');
+        
+    }
+    
 }
 
 /* End of blog_layout.php */

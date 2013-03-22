@@ -50,13 +50,37 @@ class Blog extends ShinigamiCMS\System\Core\Objectbase {
            $post['author'] = $obj->get_author();
            $post['timestamp'] = $obj->get_timestamp();
            $post['content'] = $obj->get_contents();
-           $post['comment_uri'] = '#';
+           $post['slug'] = $obj->get_slug();
            $post['comment_count'] = '0';
            array_push($posts, $post);
        }
        return $this->blog_layout->render_front_page($posts);
        //return print_r($posts, true);
         
+    }
+    
+    public function Slug($slug) {
+        if (!$slug) {
+            $page = '<h2 align="center">No post slug provided!</h2><script>document.location="/";</script>';
+            return $this->blog_layout->render_page($page);
+        }
+        else {
+            $this->loader->load_model('blog_post');
+            $post = new Blog_post();
+            if ($post->fetch_post_by_slug($slug)) {
+                $post_data = array();
+                $post_data['title'] = $post->get_title();
+                $post_data['author'] = $post->get_author();
+                $post_data['content'] = $post->get_contents();
+                $post_data['timestamp'] = $post->get_timestamp();
+                
+                return $this->blog_layout->render_post($post_data);
+            }
+            else {
+                $page = '<h2 align="center">Invalid Post</h2>';
+                return $this->blog_layout->render_page($page);
+            }
+        }
     }
     
 }
